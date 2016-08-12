@@ -1,0 +1,43 @@
+{
+  "name": "progressbardemo",
+  "version": "1.0.0",
+  "description": "Dynamic Creation of progress bars from REST API data",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "automock": false
+  },
+  "keywords": [
+    "progress",
+    "bar",
+    "react",
+    "bootstrap"
+  ],
+  "author": "Serge Merzliakov",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-jest": "^14.1.0",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "gulp": "^3.9.1",
+    "gulp-minify": "0.0.14",
+    "gulp-uglify": "^2.0.0",
+    "jest": "^14.1.0",
+    "jest-cli": "^14.1.0",
+    "react-addons-test-utils": "^15.3.0",
+    "react-test-renderer": "^15.3.0",
+    "uglify": "^0.1.5",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "flux": "^2.1.1",
+    "object-assign": "^4.1.0",
+    "react": "^15.3.0",
+    "react-bootstrap": "^0.30.2",
+    "react-dom": "^15.3.0"
+  }
+}
