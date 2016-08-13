@@ -2,13 +2,14 @@
 
 **Serge Merzliakov**
 
-This is my progress bars demo which is built using the following technologies:
+This is my progress bars demo which is built using the following javascript libraries and tools:
 
 
-  * React Framework
+  * React
   * Flux
-  * React Bootstrap Components
+  * React Bootstrap
   * Gulp
+  * Jest
 
 
 With an honorable mention to the awesome **MacDown** markdown editor for OS X.
@@ -32,3 +33,13 @@ The **dist** directory contains a complete executable version of the demo.
   * Not tested on older browsers
   * Uses the ECMA5.1 syntax, rather than ECMA6
   * I have not added the npm packages into the repository
+  * Only a handful unit tests to highlight how Jest tests are created
+
+
+### Running the Unit Tests
+
+run the command (from the base or root project directory):
+
+**npm test**
+
+
