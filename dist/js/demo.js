@@ -27761,6 +27761,8 @@ arguments[4][6][0].apply(exports,arguments)
 module.exports = require('./lib/React');
 
 },{"./lib/React":186}],333:[function(require,module,exports){
+'use strict';
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var ButtonActionCreator = {
@@ -27769,7 +27771,7 @@ var ButtonActionCreator = {
     *
     * @param delta the offset to apply to currently selected progress bar
     */
-   applyDelta: function (delta) {
+   applyDelta: function applyDelta(delta) {
       var action = {
          type: 'delta',
          data: delta
@@ -27782,6 +27784,8 @@ var ButtonActionCreator = {
 module.exports = ButtonActionCreator;
 
 },{"../dispatcher/AppDispatcher":343}],334:[function(require,module,exports){
+'use strict';
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var UpdateActionCreator = {
@@ -27790,7 +27794,7 @@ var UpdateActionCreator = {
     * Change selected Progress Bar
     * @param index
     */
-   setSelectedProgressBar: function (index) {
+   setSelectedProgressBar: function setSelectedProgressBar(index) {
       var action = {
          type: 'selection',
          data: index
@@ -27798,7 +27802,7 @@ var UpdateActionCreator = {
       AppDispatcher.dispatch(action);
    },
 
-   getProgressBarData: function () {
+   getProgressBarData: function getProgressBarData() {
       var action = {
          type: 'update',
          data: 'progress' //future data may include other kinds of updates - a bit of overkill, I know
@@ -27812,6 +27816,8 @@ var UpdateActionCreator = {
 module.exports = UpdateActionCreator;
 
 },{"../dispatcher/AppDispatcher":343}],335:[function(require,module,exports){
+'use strict';
+
 var DemoAPI = {
 
    // hardcoded for now...
@@ -27821,7 +27827,7 @@ var DemoAPI = {
     * async call to backend service.
     * @param callback invoked with customer data
     */
-   getData: function (callback) {
+   getData: function getData(callback) {
       this.fetchGet(this.host, callback);
    },
 
@@ -27831,7 +27837,7 @@ var DemoAPI = {
     * @param full_url
     * @param responseCallback called with data when it is received - async
     */
-   fetchGet: function (full_url, responseCallback) {
+   fetchGet: function fetchGet(full_url, responseCallback) {
       var myInit = {
          method: 'GET',
          cache: 'default'
@@ -27849,6 +27855,8 @@ var DemoAPI = {
 module.exports = DemoAPI;
 
 },{}],336:[function(require,module,exports){
+'use strict';
+
 /**
  * Created by serge on 25/06/16.
  *
@@ -27858,9 +27866,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Application = require('./component/Application');
 
-ReactDOM.render(React.createElement(Application, null), document.getElementById('demo-app'));
+ReactDOM.render(React.createElement(Application, { debug: false }), document.getElementById('demo-app'));
 
 },{"./component/Application":337,"react":332,"react-dom":160}],337:[function(require,module,exports){
+'use strict';
+
 /**
  * Created by serge on 25/06/16.
  */
@@ -27878,25 +27888,25 @@ var Application = React.createClass({
    displayName: 'Application',
 
 
-   getInitialState: function () {
+   getInitialState: function getInitialState() {
       return {
          progressData: null
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount: function componentDidMount() {
       //load initial values from API here on startup
-      UpdateActionCreator.getProgressBarData();
+      if (!this.props.debug) UpdateActionCreator.getProgressBarData();
    },
 
-   handleProgressSelection: function (eventKey) {
+   handleProgressSelection: function handleProgressSelection(eventKey) {
       UpdateActionCreator.setSelectedProgressBar(eventKey);
    },
 
    /**
     * @returns {XML}
     */
-   render: function () {
+   render: function render() {
       return React.createElement(
          Grid,
          null,
@@ -27940,6 +27950,8 @@ var Application = React.createClass({
 module.exports = Application;
 
 },{"../action/ButtonActionCreator":333,"../action/UpdateActionCreator":334,"./ButtonPanel":339,"./ProgressPanel":341,"./ProgressSelection":342,"react":332,"react-bootstrap/lib/Col":10,"react-bootstrap/lib/Grid":16,"react-bootstrap/lib/Row":20}],338:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var BootstrapButton = require('react-bootstrap/lib/Button');
 var ButtonActionCreator = require('../action/ButtonActionCreator');
@@ -27951,11 +27963,11 @@ var Button = React.createClass({
    displayName: 'Button',
 
 
-   handleClick: function () {
+   handleClick: function handleClick() {
       ButtonActionCreator.applyDelta(this.props.delta);
    },
 
-   render: function () {
+   render: function render() {
       return React.createElement(
          BootstrapButton,
          { bsStyle: 'info', onClick: this.handleClick },
@@ -27967,6 +27979,8 @@ var Button = React.createClass({
 module.exports = Button;
 
 },{"../action/ButtonActionCreator":333,"react":332,"react-bootstrap/lib/Button":7}],339:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Button = require('./Button');
 var ButtonGroup = require('react-bootstrap/lib/ButtonGroup');
@@ -27977,17 +27991,17 @@ var ButtonPanel = React.createClass({
    displayName: 'ButtonPanel',
 
 
-   getInitialState: function () {
+   getInitialState: function getInitialState() {
       return {
          progressData: null
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount: function componentDidMount() {
       DemoStore.addUpdateListener(this.onProgressBarUpdate);
    },
 
-   componentWillUnmount: function () {
+   componentWillUnmount: function componentWillUnmount() {
       DemoStore.removeUpdateListener(this.onProgressBarUpdate);
    },
 
@@ -27995,7 +28009,7 @@ var ButtonPanel = React.createClass({
     * progress bar data updated from API, save state and pass onto
     * children for rendering
     */
-   onProgressBarUpdate: function () {
+   onProgressBarUpdate: function onProgressBarUpdate() {
       this.setState({
          progressData: DemoStore.getReportData()
       });
@@ -28005,7 +28019,7 @@ var ButtonPanel = React.createClass({
     *
     * @returns {XML}
     */
-   render: function () {
+   render: function render() {
       var buttons = null;
       if (this.state.progressData != null) {
          var i = 0;
@@ -28026,6 +28040,8 @@ var ButtonPanel = React.createClass({
 module.exports = ButtonPanel;
 
 },{"../store/DemoStore":344,"./Button":338,"react":332,"react-bootstrap/lib/ButtonGroup":8,"react-bootstrap/lib/ButtonToolbar":9}],340:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var BootstrapBar = require('react-bootstrap/lib/ProgressBar');
 var DemoStore = require('../store/DemoStore');
@@ -28037,24 +28053,24 @@ var ProgressBar = React.createClass({
    displayName: 'ProgressBar',
 
 
-   getInitialState: function () {
+   getInitialState: function getInitialState() {
       return {
          active: false
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount: function componentDidMount() {
       DemoStore.addActivateListener(this.onActivate);
    },
 
-   componentWillUnmount: function () {
+   componentWillUnmount: function componentWillUnmount() {
       DemoStore.removeActivateListener(this.onActivate);
    },
 
    /**
     * We may be active
     */
-   onActivate: function () {
+   onActivate: function onActivate() {
       var newState = false;
       if (this.props.index == DemoStore.getCurrentProgressBarIndex()) newState = true;
 
@@ -28063,19 +28079,21 @@ var ProgressBar = React.createClass({
       });
    },
 
-   render: function () {
+   render: function render() {
       var style = "success";
       if (this.props.value >= this.props.max) style = "danger";else if (this.props.max - this.props.value < 30) style = "warning";
 
       var percentage = Math.round(this.props.value / this.props.max * 100.0, 0);
 
-      if (this.state.active) return React.createElement(BootstrapBar, { striped: true, active: true, bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: `${ percentage }%` });else return React.createElement(BootstrapBar, { bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: `${ percentage }%` });
+      if (this.state.active) return React.createElement(BootstrapBar, { striped: true, active: true, bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: percentage + '%' });else return React.createElement(BootstrapBar, { bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: percentage + '%' });
    }
 });
 
 module.exports = ProgressBar;
 
 },{"../store/DemoStore":344,"react":332,"react-bootstrap/lib/ProgressBar":19}],341:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var ProgressBar = require('./ProgressBar');
 var Panel = require('react-bootstrap/lib/Panel');
@@ -28085,18 +28103,18 @@ var ProgressPanel = React.createClass({
    displayName: 'ProgressPanel',
 
 
-   getInitialState: function () {
+   getInitialState: function getInitialState() {
       return {
          progressData: null
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount: function componentDidMount() {
       DemoStore.addUpdateListener(this.onProgressBarUpdate);
       DemoStore.addDeltaListener(this.onDeltaUpdate);
    },
 
-   componentWillUnmount: function () {
+   componentWillUnmount: function componentWillUnmount() {
       DemoStore.removeUpdateListener(this.onProgressBarUpdate);
       DemoStore.removeDeltaListener(this.onDeltaUpdate);
    },
@@ -28104,7 +28122,7 @@ var ProgressPanel = React.createClass({
    /**
     * Called on delta action, which is fired by a button click
     */
-   onDeltaUpdate: function () {
+   onDeltaUpdate: function onDeltaUpdate() {
       var delta = DemoStore.getCurrentDelta();
       var i = DemoStore.getCurrentProgressBarIndex();
       var value = this.state.progressData.bars[i];
@@ -28121,7 +28139,7 @@ var ProgressPanel = React.createClass({
     * progress bar data updated from API, save state and pass onto
     * children for rendering
     */
-   onProgressBarUpdate: function () {
+   onProgressBarUpdate: function onProgressBarUpdate() {
       this.setState({
          progressData: DemoStore.getReportData()
       });
@@ -28131,7 +28149,7 @@ var ProgressPanel = React.createClass({
     *
     * @returns {XML}
     */
-   render: function () {
+   render: function render() {
       var progressBars = null;
       if (this.state.progressData != null) {
          var i = 0;
@@ -28152,6 +28170,8 @@ var ProgressPanel = React.createClass({
 module.exports = ProgressPanel;
 
 },{"../store/DemoStore":344,"./ProgressBar":340,"react":332,"react-bootstrap/lib/Panel":18}],342:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var ProgressBar = require('./ProgressBar');
 var DropdownButton = require('react-bootstrap/lib/DropdownButton');
@@ -28162,17 +28182,17 @@ var ProgressSelection = React.createClass({
    displayName: 'ProgressSelection',
 
 
-   getInitialState: function () {
+   getInitialState: function getInitialState() {
       return {
          progressData: null
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount: function componentDidMount() {
       DemoStore.addUpdateListener(this.onProgressBarUpdate);
    },
 
-   componentWillUnmount: function () {
+   componentWillUnmount: function componentWillUnmount() {
       DemoStore.removeUpdateListener(this.onProgressBarUpdate);
    },
 
@@ -28180,7 +28200,7 @@ var ProgressSelection = React.createClass({
     * progress bar data updated from API, save state and pass onto
     * children for rendering
     */
-   onProgressBarUpdate: function () {
+   onProgressBarUpdate: function onProgressBarUpdate() {
       this.setState({
          progressData: DemoStore.getReportData()
       });
@@ -28190,7 +28210,7 @@ var ProgressSelection = React.createClass({
     *
     * @returns {XML}
     */
-   render: function () {
+   render: function render() {
       var progressBars = null;
       if (this.state.progressData != null) {
          var i = 0;
@@ -28216,11 +28236,15 @@ var ProgressSelection = React.createClass({
 module.exports = ProgressSelection;
 
 },{"../store/DemoStore":344,"./ProgressBar":340,"react":332,"react-bootstrap/lib/DropdownButton":13,"react-bootstrap/lib/MenuItem":17}],343:[function(require,module,exports){
+'use strict';
+
 var Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 
 },{"flux":3}],344:[function(require,module,exports){
+'use strict';
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
@@ -28230,17 +28254,6 @@ var DemoAPI = require('../api/DemoAPI');
 var reportData = null;
 var currentProgressBarIndex = 0; //default to first
 var currentDelta = 0;
-/**
- * receive result of API call
- * @param data
- */
-function emitDetailsChange(data) {
-   reportData = data;
-   console.log("Bars=" + data.bars);
-   console.log("Buttons=" + data.buttons);
-   console.log("Limit=" + data.limit);
-   DemoStore.emit('update');
-}
 
 /**
  * Call API and load all accounts
@@ -28248,6 +28261,15 @@ function emitDetailsChange(data) {
  */
 function loadDetails() {
    DemoAPI.getData(emitDetailsChange);
+}
+
+/**
+ * receive result of API call
+ * @param data
+ */
+function emitDetailsChange(data) {
+   reportData = data;
+   DemoStore.emit('update');
 }
 
 /**
@@ -28270,35 +28292,44 @@ function applyDelta(delta) {
  */
 var DemoStore = assign({}, EventEmitter.prototype, {
 
-   addUpdateListener: function (callback) {
+   addUpdateListener: function addUpdateListener(callback) {
       this.on('update', callback);
    },
 
-   removeUpdateListener: function (callback) {
+   removeUpdateListener: function removeUpdateListener(callback) {
       this.removeListener('update', callback);
    },
 
-   addDeltaListener: function (callback) {
+   addDeltaListener: function addDeltaListener(callback) {
       this.on('delta', callback);
    },
 
-   removeDeltaListener: function (callback) {
+   removeDeltaListener: function removeDeltaListener(callback) {
       this.removeListener('delta', callback);
    },
 
-   addActivateListener: function (callback) {
+   addActivateListener: function addActivateListener(callback) {
       this.on('activate', callback);
    },
 
-   removeActivateListener: function (callback) {
+   removeActivateListener: function removeActivateListener(callback) {
       this.removeListener('activate', callback);
+   },
+
+   /**
+    * Used for Unit testing. Not ideal - need a better way
+    * @param data
+    */
+   testEmitDetailsChange: function testEmitDetailsChange(data) {
+      reportData = data;
+      DemoStore.emit('update');
    },
 
    /**
     * List of all accounts from API
     * @returns {*}
     */
-   getReportData: function () {
+   getReportData: function getReportData() {
       return reportData;
    },
 
@@ -28306,11 +28337,11 @@ var DemoStore = assign({}, EventEmitter.prototype, {
     * return index of current progress bar
     * @returns {number}
     */
-   getCurrentProgressBarIndex: function () {
+   getCurrentProgressBarIndex: function getCurrentProgressBarIndex() {
       return currentProgressBarIndex;
    },
 
-   getCurrentDelta: function () {
+   getCurrentDelta: function getCurrentDelta() {
       return currentDelta;
    }
 });

@@ -33,7 +33,8 @@ The **dist** directory contains a complete executable version of the demo.
   * Not tested on older browsers
   * Uses the ECMA5.1 syntax, rather than ECMA6
   * I have not added the npm packages into the repository
-  * Only a handful unit tests to highlight how Jest tests are created
+  * There is only a handful unit tests to highlight how Jest tests are created
+  * The final javascript file is not minified - uglify just refused to work!
 
 
 ### Running the Unit Tests
@@ -43,3 +44,4 @@ run the command (from the base or root project directory):
 **npm test**
 
 
+  
