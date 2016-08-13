@@ -6,10 +6,11 @@ var source = require('vinyl-source-stream');
 
 
 gulp.task('minify', function() {
-   gulp.src('dist/js/demo.js')
+   gulp.src('./dist/js/*.js')
       .pipe(uglify())
-      .pipe(gulp.dest('dist/js'))
+      .pipe(gulp.dest('dist/js'));
 });
+
 
 gulp.task('default', function() {
    return browserify('src/app.js')

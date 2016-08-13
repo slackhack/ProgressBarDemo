@@ -13,6 +13,12 @@ This is my progress bars demo which is built using the following technologies:
 
 With an honorable mention to the awesome **MacDown** markdown editor for OS X.
 
+### Live Demo
+
+I have deployed the code to my demo server at:
+
+[http://epistatic-demo.com/demo4511.html]()
+
 
 ### The dist directory
 
