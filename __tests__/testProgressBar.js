@@ -10,12 +10,12 @@ describe('ProgressBar Percentage', function() {
 
       var index = 0;
       var value = 50;
-      var max = 100;
+      var max = 110;
+
+      var percentage = Math.round((value/max) * 100,0);
 
       var bar = TestUtils.renderIntoDocument(<ProgressBar index={index} key={index} value={value} max={max}/>);
-      const barNode = ReactDOM.findDOMNode(bar);
-
-      console.log(barNode.textContent);
-      expect(barNode.textContent).toEqual(value + "%");
+      var barNode = ReactDOM.findDOMNode(bar);
+      expect(barNode.textContent).toEqual(percentage + "%");
    });
 });

@@ -3,23 +3,10 @@ var EventEmitter=require('events').EventEmitter;
 var assign=require('object-assign');
 var DemoAPI=require('../api/DemoAPI');
 
-
 // state
-var reportData = null;
-var currentProgressBarIndex = 0; //default to first
-var currentDelta = 0;
-/**
- * receive result of API call
- * @param data
- */
-function emitDetailsChange(data)
-{
-   reportData = data;
-   console.log("Bars=" + data.bars);
-   console.log("Buttons=" + data.buttons);
-   console.log("Limit=" + data.limit);
-   DemoStore.emit('update');
-}
+var reportData=null;
+var currentProgressBarIndex=0; //default to first
+var currentDelta=0;
 
 /**
  * Call API and load all accounts
@@ -31,20 +18,30 @@ function loadDetails()
 }
 
 /**
+ * receive result of API call
+ * @param data
+ */
+function emitDetailsChange(data)
+{
+   reportData=data;
+   DemoStore.emit('update');
+}
+
+
+/**
  *
  * @param index index in bars array from API
  */
 function setCurrentProgressBar(index)
 {
-   currentProgressBarIndex = index;
+   currentProgressBarIndex=index;
    DemoStore.emit('activate');
    //do not emit anything - button handlers should check this value to see which chart to update
 }
 
-
 function applyDelta(delta)
 {
-   currentDelta = delta;
+   currentDelta=delta;
    DemoStore.emit('delta');
 }
 
@@ -83,6 +80,15 @@ var DemoStore=assign({}, EventEmitter.prototype, {
       this.removeListener('activate', callback);
    },
 
+   /**
+    * Used for Unit testing. Not ideal - need a better way
+    * @param data
+    */
+   testEmitDetailsChange: function(data)
+   {
+      reportData=data;
+      DemoStore.emit('update');
+   },
 
    /**
     * List of all accounts from API
@@ -102,13 +108,11 @@ var DemoStore=assign({}, EventEmitter.prototype, {
       return currentProgressBarIndex;
    },
 
-
    getCurrentDelta: function()
    {
       return currentDelta;
    }
 });
-
 
 /**
  * Process certain actions

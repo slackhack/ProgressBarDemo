@@ -7,5 +7,5 @@ var React=require('react');
 var ReactDOM = require('react-dom');
 var Application = require('./component/Application');
 
-ReactDOM.render(<Application/>, document.getElementById('demo-app'));
+ReactDOM.render(<Application debug={false}/>, document.getElementById('demo-app'));
 

@@ -24,7 +24,8 @@ var Application=React.createClass({
    componentDidMount: function()
    {
       //load initial values from API here on startup
-      UpdateActionCreator.getProgressBarData();
+      if (!this.props.debug)
+         UpdateActionCreator.getProgressBarData();
    },
 
 
