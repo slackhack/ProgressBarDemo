@@ -1,18 +1,13 @@
 
-/*
-.progress-bar{
-}
-*/
-
-/** align dropdown anf buttons on the same line, overriding bootstrap dropdown
- behaviour **/
+/** align dropdown anf buttons on the same line,
+    overriding bootstrap dropdown behaviour **/
 .level{
     display: flex;
     flex-direction: row;
 }
 
 /**
- Drop down menu
+  Drop down menu alignment
 */
 #progressSelector{
     margin-bottom: 10px;
@@ -22,8 +17,4 @@
 h5{
     color: #00006e;
     margin-top: 0px;
-}
-
-.fix{
-    text-align: right;
 }
