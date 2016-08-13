@@ -1,11 +1,3 @@
-
-/** align dropdown anf buttons on the same line,
-    overriding bootstrap dropdown behaviour **/
-.level{
-    display: flex;
-    flex-direction: row;
-}
-
 /**
   Drop down menu alignment
 */
