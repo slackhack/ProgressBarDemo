@@ -13,14 +13,6 @@ var Col=require('react-bootstrap/lib/Col');
 
 var Application=React.createClass({
 
-   getInitialState: function()
-   {
-      return {
-         progressData: null
-      };
-
-   },
-
    componentDidMount: function()
    {
       //load initial values from API here on startup

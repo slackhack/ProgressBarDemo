@@ -27888,12 +27888,6 @@ var Application = React.createClass({
    displayName: 'Application',
 
 
-   getInitialState: function getInitialState() {
-      return {
-         progressData: null
-      };
-   },
-
    componentDidMount: function componentDidMount() {
       //load initial values from API here on startup
       if (!this.props.debug) UpdateActionCreator.getProgressBarData();
