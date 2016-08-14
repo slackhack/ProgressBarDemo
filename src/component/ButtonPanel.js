@@ -4,6 +4,9 @@ var ButtonGroup=require('react-bootstrap/lib/ButtonGroup');
 var ButtonToolbar=require('react-bootstrap/lib/ButtonToolbar');
 var DemoStore=require('../store/DemoStore');
 
+/**
+ * Container for all dynamically generated buttons
+ */
 var ButtonPanel=React.createClass({
 
    getInitialState: function()

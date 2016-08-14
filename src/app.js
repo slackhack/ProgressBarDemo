@@ -1,7 +1,5 @@
 /**
- * Created by serge on 25/06/16.
- *
- * Basic Sales app demo
+ * Entry point for Progress Bar demo.
  */
 var React=require('react');
 var ReactDOM = require('react-dom');

@@ -3,6 +3,9 @@ var ProgressBar=require('./ProgressBar');
 var Panel=require('react-bootstrap/lib/Panel');
 var DemoStore=require('../store/DemoStore');
 
+/**
+ * Container for all progress bars
+ */
 var ProgressPanel=React.createClass({
 
    getInitialState: function()

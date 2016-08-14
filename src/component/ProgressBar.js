@@ -3,7 +3,7 @@ var BootstrapBar=require('react-bootstrap/lib/ProgressBar');
 var DemoStore=require('../store/DemoStore');
 
 /**
- * click handler is passed in from parent
+ * Setup a Single Progress Bar with colour coded range
  */
 var ProgressBar=React.createClass({
 

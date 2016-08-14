@@ -3,7 +3,7 @@ var BootstrapButton=require('react-bootstrap/lib/Button');
 var ButtonActionCreator=require('../action/ButtonActionCreator');
 
 /**
- * click handler is passed in from parent
+ * Setup a single button from API call data
  */
 var Button=React.createClass({
 

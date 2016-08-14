@@ -4,6 +4,9 @@ var DropdownButton=require('react-bootstrap/lib/DropdownButton');
 var MenuItem=require('react-bootstrap/lib/MenuItem');
 var DemoStore=require('../store/DemoStore');
 
+/**
+ * Dropdown menu to select which progress bar to control
+ */
 var ProgressSelection=React.createClass({
 
    getInitialState: function()

@@ -1,6 +1,3 @@
-/**
- * Created by serge on 25/06/16.
- */
 var React=require('react');
 var UpdateActionCreator=require('../action/UpdateActionCreator');
 var ButtonActionCreator=require('../action/ButtonActionCreator');
@@ -11,6 +8,9 @@ var Grid=require('react-bootstrap/lib/Grid');
 var Row=require('react-bootstrap/lib/Row');
 var Col=require('react-bootstrap/lib/Col');
 
+/**
+ * Top level container for the Demo application
+ */
 var Application=React.createClass({
 
    componentDidMount: function()
