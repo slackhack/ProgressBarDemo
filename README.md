@@ -9,6 +9,7 @@ This is my progress bars demo which is built using the following javascript libr
   * Flux
   * React Bootstrap
   * Gulp
+  * npm
   * Jest
 
 
