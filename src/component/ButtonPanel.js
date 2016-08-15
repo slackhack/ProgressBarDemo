@@ -12,7 +12,7 @@ var ButtonPanel=React.createClass({
    getInitialState: function()
    {
       return {
-         progressData: null
+         progressData: {"buttons":[],"bars":[],"limit":0}
       };
    },
 
@@ -43,15 +43,11 @@ var ButtonPanel=React.createClass({
     */
    render: function()
    {
-      var buttons=null;
-      if(this.state.progressData != null)
+      var i=0;
+      var buttons=this.state.progressData.buttons.map(function(delta)
       {
-         var i=0;
-         var clickHandler=this.buttonClick;
-         buttons=this.state.progressData.buttons.map(function(delta){
-            return <Button key={i++} label={delta} delta={delta}/>;
-         });
-      }
+         return <Button key={i++} label={delta} delta={delta}/>;
+      });
 
       return (
          <ButtonToolbar>

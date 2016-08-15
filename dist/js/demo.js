@@ -27858,9 +27858,7 @@ module.exports = DemoAPI;
 'use strict';
 
 /**
- * Created by serge on 25/06/16.
- *
- * Basic Sales app demo
+ * Entry point for Progress Bar demo.
  */
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -27871,9 +27869,6 @@ ReactDOM.render(React.createElement(Application, { debug: false }), document.get
 },{"./component/Application":337,"react":332,"react-dom":160}],337:[function(require,module,exports){
 'use strict';
 
-/**
- * Created by serge on 25/06/16.
- */
 var React = require('react');
 var UpdateActionCreator = require('../action/UpdateActionCreator');
 var ButtonActionCreator = require('../action/ButtonActionCreator');
@@ -27884,6 +27879,9 @@ var Grid = require('react-bootstrap/lib/Grid');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 
+/**
+ * Top level container for the Demo application
+ */
 var Application = React.createClass({
    displayName: 'Application',
 
@@ -27951,7 +27949,7 @@ var BootstrapButton = require('react-bootstrap/lib/Button');
 var ButtonActionCreator = require('../action/ButtonActionCreator');
 
 /**
- * click handler is passed in from parent
+ * Setup a single button from API call data
  */
 var Button = React.createClass({
    displayName: 'Button',
@@ -27981,13 +27979,16 @@ var ButtonGroup = require('react-bootstrap/lib/ButtonGroup');
 var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar');
 var DemoStore = require('../store/DemoStore');
 
+/**
+ * Container for all dynamically generated buttons
+ */
 var ButtonPanel = React.createClass({
    displayName: 'ButtonPanel',
 
 
    getInitialState: function getInitialState() {
       return {
-         progressData: null
+         progressData: { "buttons": [], "bars": [], "limit": 0 }
       };
    },
 
@@ -28014,14 +28015,10 @@ var ButtonPanel = React.createClass({
     * @returns {XML}
     */
    render: function render() {
-      var buttons = null;
-      if (this.state.progressData != null) {
-         var i = 0;
-         var clickHandler = this.buttonClick;
-         buttons = this.state.progressData.buttons.map(function (delta) {
-            return React.createElement(Button, { key: i++, label: delta, delta: delta });
-         });
-      }
+      var i = 0;
+      var buttons = this.state.progressData.buttons.map(function (delta) {
+         return React.createElement(Button, { key: i++, label: delta, delta: delta });
+      });
 
       return React.createElement(
          ButtonToolbar,
@@ -28041,7 +28038,7 @@ var BootstrapBar = require('react-bootstrap/lib/ProgressBar');
 var DemoStore = require('../store/DemoStore');
 
 /**
- * click handler is passed in from parent
+ * Setup a Single Progress Bar with colour coded range
  */
 var ProgressBar = React.createClass({
    displayName: 'ProgressBar',
@@ -28079,7 +28076,8 @@ var ProgressBar = React.createClass({
 
       var percentage = Math.round(this.props.value / this.props.max * 100.0, 0);
 
-      if (this.state.active) return React.createElement(BootstrapBar, { striped: true, active: true, bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: percentage + '%' });else return React.createElement(BootstrapBar, { bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: percentage + '%' });
+      if (this.state.active) return React.createElement(BootstrapBar, { striped: true, active: true, bsStyle: style, now: this.props.value, min: 0, max: this.props.max,
+         label: percentage + '%' });else return React.createElement(BootstrapBar, { bsStyle: style, now: this.props.value, min: 0, max: this.props.max, label: percentage + '%' });
    }
 });
 
@@ -28093,13 +28091,16 @@ var ProgressBar = require('./ProgressBar');
 var Panel = require('react-bootstrap/lib/Panel');
 var DemoStore = require('../store/DemoStore');
 
+/**
+ * Container for all progress bars
+ */
 var ProgressPanel = React.createClass({
    displayName: 'ProgressPanel',
 
 
    getInitialState: function getInitialState() {
       return {
-         progressData: null
+         progressData: { "buttons": [], "bars": [], "limit": 0 }
       };
    },
 
@@ -28144,14 +28145,12 @@ var ProgressPanel = React.createClass({
     * @returns {XML}
     */
    render: function render() {
-      var progressBars = null;
-      if (this.state.progressData != null) {
-         var i = 0;
-         var maxValue = this.state.progressData.limit;
-         progressBars = this.state.progressData.bars.map(function (value) {
-            return React.createElement(ProgressBar, { index: i, key: i++, value: value, max: maxValue });
-         });
-      }
+      var progressBars = "Waiting for data to load...";
+      var i = 0;
+      var maxValue = this.state.progressData.limit;
+      progressBars = this.state.progressData.bars.map(function (value) {
+         return React.createElement(ProgressBar, { index: i, key: i++, value: value, max: maxValue });
+      });
 
       return React.createElement(
          Panel,
@@ -28172,6 +28171,9 @@ var DropdownButton = require('react-bootstrap/lib/DropdownButton');
 var MenuItem = require('react-bootstrap/lib/MenuItem');
 var DemoStore = require('../store/DemoStore');
 
+/**
+ * Dropdown menu to select which progress bar to control
+ */
 var ProgressSelection = React.createClass({
    displayName: 'ProgressSelection',
 

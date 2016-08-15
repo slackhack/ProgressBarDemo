@@ -28,11 +28,11 @@ var ProgressBar=React.createClass({
    /**
     * We may be active
     */
-   onActivate:function()
+   onActivate: function()
    {
-      var newState = false;
-      if (this.props.index == DemoStore.getCurrentProgressBarIndex())
-         newState = true;
+      var newState=false;
+      if(this.props.index == DemoStore.getCurrentProgressBarIndex())
+         newState=true;
 
       this.setState({
          active: newState
@@ -49,14 +49,15 @@ var ProgressBar=React.createClass({
 
       var percentage=Math.round((this.props.value / this.props.max) * 100.0, 0);
 
-      if (this.state.active)
+      if(this.state.active)
          return (
-            <BootstrapBar striped active bsStyle={style} now={this.props.value} min={0} max={this.props.max} label={`${percentage}%`}/>
+            <BootstrapBar striped active bsStyle={style} now={this.props.value} min={0} max={this.props.max}
+                          label={`${percentage}%`}/>
          );
-         else
-      return (
-         <BootstrapBar bsStyle={style} now={this.props.value} min={0} max={this.props.max} label={`${percentage}%`}/>
-      );
+      else
+         return (
+            <BootstrapBar bsStyle={style} now={this.props.value} min={0} max={this.props.max} label={`${percentage}%`}/>
+         );
    }
 });
 

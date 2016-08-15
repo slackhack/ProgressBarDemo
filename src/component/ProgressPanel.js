@@ -11,7 +11,7 @@ var ProgressPanel=React.createClass({
    getInitialState: function()
    {
       return {
-         progressData: null
+         progressData: {"buttons":[],"bars":[],"limit":0}
       };
    },
 
@@ -30,18 +30,18 @@ var ProgressPanel=React.createClass({
    /**
     * Called on delta action, which is fired by a button click
     */
-   onDeltaUpdate:function()
+   onDeltaUpdate: function()
    {
-      var delta = DemoStore.getCurrentDelta();
-      var i = DemoStore.getCurrentProgressBarIndex();
-      var value = this.state.progressData.bars[i];
-      value += delta;
-      if (value < 0)
-         value = 0;
-      this.state.progressData.bars[i] = value;
+      var delta=DemoStore.getCurrentDelta();
+      var i=DemoStore.getCurrentProgressBarIndex();
+      var value=this.state.progressData.bars[i];
+      value+=delta;
+      if(value < 0)
+         value=0;
+      this.state.progressData.bars[i]=value;
 
       this.setState({
-         progressData : this.state.progressData
+         progressData: this.state.progressData
       });
    },
 
@@ -49,7 +49,8 @@ var ProgressPanel=React.createClass({
     * progress bar data updated from API, save state and pass onto
     * children for rendering
     */
-   onProgressBarUpdate: function(){
+   onProgressBarUpdate: function()
+   {
       this.setState({
          progressData: DemoStore.getReportData()
       });
@@ -61,16 +62,12 @@ var ProgressPanel=React.createClass({
     */
    render: function()
    {
-      var progressBars=null;
-      if(this.state.progressData != null)
+      var i=0;
+      var maxValue=this.state.progressData.limit;
+      var progressBars=this.state.progressData.bars.map(function(value)
       {
-         var i=0;
-         var maxValue = this.state.progressData.limit;
-         progressBars=this.state.progressData.bars.map(function(value)
-         {
-            return <ProgressBar index={i} key={i++} value={value} max={maxValue}/>;
-         });
-      }
+         return <ProgressBar index={i} key={i++} value={value} max={maxValue}/>;
+      });
 
       return (
          <Panel>
