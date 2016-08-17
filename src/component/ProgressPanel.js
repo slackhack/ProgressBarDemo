@@ -1,3 +1,4 @@
+"use strict";
 var React=require('react');
 var ProgressBar=require('./ProgressBar');
 var Panel=require('react-bootstrap/lib/Panel');
