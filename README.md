@@ -33,7 +33,7 @@ The **dist** directory contains a complete, runnable version of the demo.
 
   * Not tested on older browsers
   * Uses the ECMA5.1 syntax, rather than ECMA6
-  * I have not added the npm packages into the repository
+  * I have not added the npm packages into the repository (run npm install to setup on your PC)
   * There is only a handful unit tests to highlight how Jest tests are created
 
 
